@@ -1,11 +1,22 @@
+96% of storage used … If you run out, you can't create, edit and upload files. Get 30 GB for ₹15 for 3 months ₹59.
+1
+100%
 pipeline {
     agent any
     environment {
-		x = 200
-		y = 300
+		x = 400
+		y = 800
+		git_token = 'github-token'
+		docker_token = 'docker-token'
 	}
+	parameters {
+        string(name: 'person', defaultValue: 'Ekamjeet Singh', description: 'Enter your username to continue this Job')
+		choice(name: 'ENVIRONMENT', choices: ['dev', 'qa', 'prod'], description: 'Select environment to run this JOB')
+    }
+	triggers {
+        githubPush()   // reacts to GitHub webhook events
+    }
     stages {
-	
         stage('Build Information'){
          steps{
                echo 'Yello printing'
@@ -26,6 +37,15 @@ pipeline {
                echo 'Red printing'
 			   sh 'echo $x'
 			   sh 'echo $y'
+			   sh 'echo  $git_token'
+			  sh 'echo  $docker_token'
+            }
+        }
+		stage('Show Parameters values'){
+              steps{
+				sh  'echo $person'
+			//	echo "Username: ${params.person}"
+				"echo ${params.ENVIRONMENT}"
             }
         }
     }
