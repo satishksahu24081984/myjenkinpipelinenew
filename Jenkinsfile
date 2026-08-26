@@ -42,8 +42,8 @@ pipeline {
 		stage('Show Parameters values'){
               steps{
 				sh  'echo $person'
-			//	echo "Username: ${params.person}"
-				//"echo ${params.ENVIRONMENT}"
+			echo "Username: ${params.person}"
+			echo ${params.ENVIRONMENT}"
             }
         }
     }
