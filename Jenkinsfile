@@ -9,7 +9,7 @@ pipeline {
 	}
 	parameters {
         string(name: 'person', defaultValue: 'Ekamjeet Singh', description: 'Enter your username to continue this Job')
-		choice(name: 'ENVIRONMENT', choices: ['dev', 'qa', 'prod'], description: 'Select environment to run this JOB')
+		
     }
 	triggers {
         githubPush()   // reacts to GitHub webhook events
@@ -42,8 +42,7 @@ pipeline {
 		stage('Show Parameters values'){
               steps{
 				sh  'echo $person'
-			echo "Username: ${params.person}"
-			echo ${params.ENVIRONMENT}"
+			
             }
         }
     }
